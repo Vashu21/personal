@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Propose Day 💕</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffd1dc, #fce4ec);
+        font-family: "Comic Sans MS", "Segoe UI", cursive;
+        color: #4a2c2a;
+        overflow: hidden;
+    }
+
+    .card {
+        background: #fff0f5;
+        padding: 40px;
+        border-radius: 30px;
+        text-align: center;
+        width: 520px;
+        box-shadow: 0 20px 40px rgba(255, 120, 150, 0.35);
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 12px;
+        font-weight: normal;
+    }
+
+    p {
+        font-size: 19px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .signature {
+        font-size: 15px;
+        color: #a05a6c;
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        position: relative;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 17px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #yesBtn {
+        background: #ff6f91;
+        color: white;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 110, 145, 0.6);
+    }
+
+    #noBtn {
+        background: #ffe1ea;
+        color: #555;
+        position: relative;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        font-size: 20px;
+        animation: floatUp 6s infinite;
+        opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0.6; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- floating hearts -->
+<div class="heart" style="left:15%;">💗</div>
+<div class="heart" style="left:40%; animation-delay:2s;">💞</div>
+<div class="heart" style="left:70%; animation-delay:4s;">💖</div>
+
+<div class="card" id="page1">
+    <h1>Happy Propose Day 💕</h1>
+
+    <p>
+        Hey Deeksha,<br>
+        will you be my Valentine<br>
+        and walk through life with me? ❤️
+    </p>
+
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+        <button id="noBtn" onmouseover="moveNo()">No 🙈</button>
+    </div>
+</div>
+
+<script>
+    function moveNo() {
+        const btn = document.getElementById("noBtn");
+        const x = Math.floor(Math.random() * 140) - 70;
+        const y = Math.floor(Math.random() * 60) - 30;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                background:linear-gradient(135deg, #ffd1dc, #fce4ec);
+                font-family:'Comic Sans MS','Segoe UI',cursive;
+            ">
+                <div style="
+                    background:#fff0f5;
+                    padding:45px;
+                    border-radius:30px;
+                    text-align:center;
+                    width:520px;
+                    box-shadow:0 20px 40px rgba(255,120,150,0.35);
+                    animation: fadeIn 1.5s forwards;
+                ">
+                    <p style="font-size:20px; line-height:1.7;">
+                        ❤️<br><br>
+                        I’ve started liking you<br>
+                        and I’m really glad it’s you.<br>
+                        I’d love to build something meaningful together. ✨
+                    </p>
+
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzRpemJzdnVqN2U3NmN6YnU0OXJ3MDlwYmx6Ymg3eDdjZ2x5b2lhbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0EJWybud11odVuLrPi/giphy.gif"  
+                         style="width:260px; margin-top:25px; border-radius:15px;">
+                </div>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>
