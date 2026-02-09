@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Propose Day 💕</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffd1dc, #fce4ec);
+        font-family: "Comic Sans MS", "Segoe UI", cursive;
+        color: #4a2c2a;
+        overflow: hidden;
+    }
+
+    .card {
+        background: #fff0f5;
+        padding: 45px;
+        border-radius: 30px;
+        text-align: center;
+        width: 520px;
+        box-shadow: 0 20px 40px rgba(255, 120, 150, 0.35);
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
+        position: relative;
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: normal;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 19px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        position: relative;
+        height: 70px;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 17px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+    }
+
+    #yesBtn {
+        background: #ff6f91;
+        color: white;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(255, 110, 145, 0.6);
+    }
+
+    #noBtn {
+        background: #ffe1ea;
+        color: #555;
+        position: absolute;
+        left: 140px;
+        top: 0;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        font-size: 20px;
+        animation: floatUp 6s infinite;
+        opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0.6; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="instrumental.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating hearts -->
+<div class="heart" style="left:15%;">💗</div>
+<div class="heart" style="left:40%; animation-delay:2s;">💞</div>
+<div class="heart" style="left:70%; animation-delay:4s;">💖</div>
+
+<!-- FIRST PAGE -->
+<div class="card" id="page1">
+    <h1>Happy Propose Day 💕</h1>
+
+    <p>
+        Hey Deeksha,<br>
+        will you be my Valentine<br>
+        and walk through life with me? ❤️
+    </p>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+        <button 
+            id="noBtn" 
+            onmouseenter="escapeNo()"
+            onmouseover="escapeNo()" 
+            onmousedown="escapeNo()" 
+            ontouchstart="escapeNo()">
+            No 🙈
+        </button>
+    </div>
+</div>
+
+<script>
+    /* ================= MUSIC ================= */
+    const music = document.getElementById("bgMusic");
+    let musicStarted = false;
+    music.volume = 0;
+
+    function fadeInMusic() {
+        let vol = 0;
+        const fade = setInterval(() => {
+            if (vol < 0.35) {
+                vol += 0.02;
+                music.volume = vol;
+            } else {
+                clearInterval(fade);
+            }
+        }, 200);
+    }
+
+    function startMusic() {
+        if (!musicStarted) {
+            music.play().then(fadeInMusic).catch(() => {});
+            musicStarted = true;
+        }
+    }
+
+    document.addEventListener("mousemove", startMusic, { once: true });
+    document.addEventListener("touchstart", startMusic, { once: true });
+    document.addEventListener("click", startMusic, { once: true });
+
+    /* ================= NO BUTTON CONTROL ================= */
+
+function escapeNo() {
+    const btn = document.getElementById("noBtn");
+    const card = document.querySelector(".card");
+    const yesBtn = document.getElementById("yesBtn");
+
+    const cardRect = card.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const yesRect = yesBtn.getBoundingClientRect();
+
+    const padding = 20;
+
+    let x, y;
+
+    do {
+        // FAST & BIG movement but still confined
+        x = Math.random() * (cardRect.width - btnRect.width - padding * 2) + padding;
+        y = Math.random() * (cardRect.height - btnRect.height - padding * 2) + padding;
+
+    } while (
+        // Avoid overlapping YES button
+        x + btnRect.width > (yesRect.left - cardRect.left - 10) &&
+        x < (yesRect.right - cardRect.left + 10) &&
+        y + btnRect.height > (yesRect.top - cardRect.top - 10) &&
+        y < (yesRect.bottom - cardRect.top + 10)
+    );
+
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+// Absolute safety
+document.getElementById("noBtn").onclick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+};
+
+    /* ================= SECOND PAGE ================= */
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                background:linear-gradient(135deg, #ffd1dc, #fce4ec);
+                font-family:'Comic Sans MS','Segoe UI',cursive;
+            ">
+                <div style="
+                    background:#fff0f5;
+                    padding:45px;
+                    border-radius:30px;
+                    text-align:center;
+                    width:520px;
+                    box-shadow:0 20px 40px rgba(255,120,150,0.35);
+                    animation: fadeIn 1.5s forwards;
+                ">
+                    <p style="font-size:20px; line-height:1.7;">
+                        ❤️<br><br>
+                        I’ve started liking you<br>
+                        and I’m really glad it’s you.<br>
+                        I’d love to build something meaningful together. ✨
+                    </p>
+
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMzRpemJzdnVqN2U3NmN6YnU0OXJ3MDlwYmx6Ymg3eDdjZ2x5b2lhbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/0EJWybud11odVuLrPi/giphy.gif"
+                         style="width:260px; margin-top:25px; border-radius:15px;">
+                </div>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>
